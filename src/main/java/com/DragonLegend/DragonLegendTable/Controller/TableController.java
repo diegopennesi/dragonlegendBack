@@ -9,6 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
+@CrossOrigin(origins = "Http://localhost:8081")
 @RestController
 @RequestMapping(value="/table")
 public class TableController {
@@ -21,7 +23,7 @@ public class TableController {
         return ResponseEntity.ok(engineT.getTable(limit,closed));
     }
     //todoValidation
-    @CrossOrigin(origins = "Http://localhost:8081")
+
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> putTable (@RequestHeader(value = "user",defaultValue = "SysAdm") String user, @RequestBody Table x) throws Exception {
        try{

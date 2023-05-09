@@ -1,5 +1,7 @@
 package com.DragonLegend.DragonLegendTable.Model;
 
+import com.DragonLegend.DragonLegendTable.Utility.ObjectIdStringSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -18,6 +20,7 @@ import java.util.List;
 @Document("Table")//CollecionTame
 public class Table {
     @Field(targetType = FieldType.OBJECT_ID)
+    @JsonSerialize(using = ObjectIdStringSerializer.class)
     private ObjectId id;
     @NotNull
     @NotEmpty

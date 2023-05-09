@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "Http://localhost:8081")
 @RequestMapping(value="/order")
 public class OrderController {
     @Autowired
@@ -32,9 +33,14 @@ public class OrderController {
         return ResponseEntity.ok(x);
     }
 
-    @PutMapping(value="{tableId}",produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value="{tableId}/list",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity editOrder(@PathVariable String tableId,@RequestBody List<Order> request) throws Exception {
         orderEngineInt.putOrder(request,tableId);
+        return ResponseEntity.ok("");
+    }
+    @PutMapping(value="{tableId}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity editOrder(@PathVariable String tableId,@RequestBody Order request) throws Exception {
+        orderEngineInt.putSingleOrder(request,tableId);
         return ResponseEntity.ok("");
     }
 }

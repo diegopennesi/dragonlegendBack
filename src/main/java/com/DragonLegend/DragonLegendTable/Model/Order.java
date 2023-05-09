@@ -1,18 +1,24 @@
 package com.DragonLegend.DragonLegendTable.Model;
 
+import com.DragonLegend.DragonLegendTable.Utility.ObjectIdStringSerializer;
+import com.DragonLegend.DragonLegendTable.Utility.ObjectIdStringSeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
-import org.springframework.data.mongodb.core.mapping.MongoId;
+
 
 @Document("Orders")//CollecionTame
 public class Order {
 
     @Field(targetType = FieldType.OBJECT_ID)
-    String id;
+    @JsonSerialize(using = ObjectIdStringSerializer.class)
+    @JsonDeserialize(using = ObjectIdStringSeserializer.class)
+    ObjectId id;
     @NotEmpty
     @NotNull
     private String itemName;
@@ -27,7 +33,7 @@ public class Order {
 
     }
 
-    public Order(String id,String itemName, String extraInfo, String printedString, String waiter, boolean paid) {
+    public Order(ObjectId id,String itemName, String extraInfo, String printedString, String waiter, boolean paid) {
         this.id = id;
         this.itemName = itemName;
         this.extraInfo = extraInfo;
@@ -76,11 +82,23 @@ public class Order {
         this.paid = paid;
     }
 
-    public String getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", itemName='" + itemName + '\'' +
+                ", extraInfo='" + extraInfo + '\'' +
+                ", printedString='" + printedString + '\'' +
+                ", waiter='" + waiter + '\'' +
+                ", paid=" + paid +
+                '}';
+    }
+
 }

@@ -28,18 +28,20 @@ public class Order {
     private String printedString;
     private String waiter;
     private boolean paid;
+    private double price;
 
     public Order() {
 
     }
 
-    public Order(ObjectId id,String itemName, String extraInfo, String printedString, String waiter, boolean paid) {
+    public Order(ObjectId id,String itemName, String extraInfo, String printedString, String waiter, boolean paid,double price) {
         this.id = id;
         this.itemName = itemName;
         this.extraInfo = extraInfo;
         this.printedString = printedString;
         this.waiter = waiter;
         this.paid = paid;
+        this.price= price;
     }
 
     public String getItemName() {
@@ -89,6 +91,14 @@ public class Order {
     public void setId(ObjectId id) {
         this.id = id;
     }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
     @Override
     public String toString() {
         return "Order{" +
@@ -97,7 +107,8 @@ public class Order {
                 ", extraInfo='" + extraInfo + '\'' +
                 ", printedString='" + printedString + '\'' +
                 ", waiter='" + waiter + '\'' +
-                ", paid=" + paid +
+                ", paid=" + paid + '\'' +
+                ", price=" + price +
                 '}';
     }
 

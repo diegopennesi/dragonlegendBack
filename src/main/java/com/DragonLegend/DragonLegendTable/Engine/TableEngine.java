@@ -1,5 +1,6 @@
 package com.DragonLegend.DragonLegendTable.Engine;
 
+import com.DragonLegend.DragonLegendTable.Model.Order;
 import com.DragonLegend.DragonLegendTable.Model.Table;
 import com.DragonLegend.DragonLegendTable.Repository.TableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @Primary
@@ -35,7 +37,7 @@ public class TableEngine {
     public boolean closeTable(String nameId) throws Exception {
         Table table=dao.searchTableByNameIdAndStatus(nameId,false,false);
         //TBD table must not be closed if associated to an order whit pending payment.
-        if(table.getAssociatedOrder().isEmpty()){
+        if(table.getAssociatedOrder().stream().anyMatch(Order::isPaid) ||table.getAssociatedOrder().isEmpty()){
             table.setClosed(true);
             entity.save(table);
             return true;

@@ -40,7 +40,8 @@ public class OrderController {
     }
     @PutMapping(value="{tableId}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity editOrder(@PathVariable String tableId,@RequestBody Order request) throws Exception {
-        orderEngineInt.putSingleOrder(request,tableId);
-        return ResponseEntity.ok("");
+        System.out.println("~~~~");
+        orderEngineInt.putSingleOrder(request,tableId).stream().forEach(e->System.out.println(e.toString()));
+        return ResponseEntity.ok(orderEngineInt.putSingleOrder(request,tableId));
     }
 }

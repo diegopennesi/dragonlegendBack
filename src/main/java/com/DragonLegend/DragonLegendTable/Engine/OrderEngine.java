@@ -30,13 +30,16 @@ public class OrderEngine extends TableEngine implements OrderEngineInterface
     @Override
     public List<Order> putSingleOrder(Order order, String table) throws Exception {
         Table x = SearchTableByIdAndStatus(table,false, false);
-        //x.getAssociatedOrder().add(order);
-        Optional<Order> existingOrder=x.getAssociatedOrder().stream().filter(e->e.getId().equals(order.getId())).findFirst();
+        //Optional<Order> existingOrder=x.getAssociatedOrder().stream().filter(e->e.getId().equals(order.getId())).findFirst();
+        Optional<Order> existingOrder = Optional.ofNullable(x.getAssociatedOrder())
+                .filter(list->!list.isEmpty())
+                .flatMap(list ->list.stream().filter(e->e.getId().equals(order.getId())).findFirst());
         if(existingOrder.isPresent()){
             Order updateOrder=existingOrder.get();
             updateOrder.setPaid(order.isPaid());
             updateOrder.setExtraInfo(order.getExtraInfo());
         }else{
+            order.setId(new ObjectId());
             x.getAssociatedOrder().add(order);
         }
        updateTable(x);

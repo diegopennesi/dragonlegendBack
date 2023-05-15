@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedList;
 import java.util.List;
-
-@RestController
 @CrossOrigin(origins = "Http://localhost:8081")
+@RestController
 @RequestMapping(value="/order")
 public class OrderController {
     @Autowired

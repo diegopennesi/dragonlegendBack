@@ -39,7 +39,7 @@ public class AdminEngine implements AdminEngineInterface {
             updateMenuItem.setId(menuItem.getId());
             updateMenuItem.setItemName(menuItem.getItemName());
             updateMenuItem.setAllergens(menuItem.getAllergens());
-            updateMenuItem.setMenuClass(menuItem.getMenuClass());
+            updateMenuItem.setMenuClass(menuItem.getMenuClass().replaceAll(" ","_"));
             updateMenuItem.setDescription(menuItem.getDescription());
             updateMenuItem.setPrice(menuItem.getPrice());
             admEntity.save(updateMenuItem);

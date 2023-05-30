@@ -12,13 +12,15 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
-@CrossOrigin(origins = "Http://localhost:8081")
+//@CrossOrigin(origins = "Http://\"Http://localhost:8081\",\"http://192.168.2.135:8081/\"}:8081")
+//@CrossOrigin(origins = "*",allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
+
 @RestController
 @RequestMapping(value="/adm")
 public class AdminController {
     @Autowired
     AdminEngineInterface adminEngine;
-    @CrossOrigin(origins = "Http://localhost:8081")
+    //@CrossOrigin(origins = "Http://localhost:8081")
     @GetMapping(value ="/menuItem", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getMenuByClass(@RequestParam(value = "classMenu",required = false,defaultValue = "") List<String> classMenu){
        // return ResponseEntity.ok(adminEngine.getMenuByClass(classMenu));

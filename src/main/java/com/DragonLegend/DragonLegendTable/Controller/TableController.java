@@ -10,7 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-@CrossOrigin(origins = "Http://localhost:8081")
+//@CrossOrigin(origins = "Http://\"Http://localhost:8081\",\"http://192.168.2.135:8081/\"}:8081")
+//@CrossOrigin(origins = "*",allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 @RestController
 @RequestMapping(value="/table")
 public class TableController {

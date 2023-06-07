@@ -6,7 +6,7 @@ import java.awt.*;
 import java.util.List;
 
 public interface AdminEngineInterface {
-    public List<MenuItem>getMenuByClass(List<String> menuClass);
+    public List<MenuItem>getMenuByFilter(List<String> filter);
     public MenuItem addNewMenuitem(MenuItem menuItem);
     public boolean deleteItem(String id);
 }

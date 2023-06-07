@@ -22,10 +22,9 @@ public class AdminController {
     AdminEngineInterface adminEngine;
     //@CrossOrigin(origins = "Http://localhost:8081")
     @GetMapping(value ="/menuItem", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getMenuByClass(@RequestParam(value = "classMenu",required = false,defaultValue = "") List<String> classMenu){
+    public ResponseEntity getMenuByfilter(@RequestParam(value = "filter",required = false,defaultValue = "") List<String> filter){
        // return ResponseEntity.ok(adminEngine.getMenuByClass(classMenu));
-       //List<String> request=  (classMenu == null)? new ArrayList<>():classMenu;
-        return ResponseEntity.ok(adminEngine.getMenuByClass(classMenu));
+        return ResponseEntity.ok(adminEngine.getMenuByFilter(filter));
     }
     @PostMapping(value ="/menuItem",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity addNewitem(@RequestBody(required = true)MenuItem request){

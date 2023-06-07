@@ -17,21 +17,24 @@ public class AdminEngine implements AdminEngineInterface {
     @Autowired
     AdminRepository admEntity;
     @Override
-    public List<MenuItem> getMenuByClass(List<String> menuclasslist) {
-        if(menuclasslist.size()<=0){return admEntity.findAll();}
+    public List<MenuItem> getMenuByFilter(List<String> filterList) {
+        if(filterList.size()<=0){return admEntity.findAll();}
         List<MenuItem> menuList=Optional.ofNullable(admEntity.findAll())
                 .filter(list->!list.isEmpty())
                 .stream()
                 .flatMap(List::stream)
-                .filter(e->menuclasslist.contains(e.getMenuClass()))
+                .filter(e -> filterList.stream().anyMatch(
+                        filter -> e.getMenuClass().toLowerCase().contains(filter.toLowerCase())
+                                || e.getItemName().toLowerCase().contains(filter.toLowerCase())
+                                || String.valueOf(e.getPrice()).equals(filter))
+                        )
                 .collect(Collectors.toList());
-
         return menuList;
     }
 
     @Override
     public MenuItem addNewMenuitem(MenuItem menuItem) {
-        Optional<MenuItem> existingMenuItem = Optional.ofNullable(getMenuByClass(new LinkedList<>()))
+        Optional<MenuItem> existingMenuItem = Optional.ofNullable(getMenuByFilter(new LinkedList<>()))
                 .filter(list->!list.isEmpty())
                 .flatMap(list ->list.stream().filter(e->e.getId().equals(menuItem.getId())).findFirst());
         if(existingMenuItem.isPresent()){

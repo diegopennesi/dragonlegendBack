@@ -2,6 +2,7 @@ package com.DragonLegend.DragonLegendTable.Controller;
 
 import com.DragonLegend.DragonLegendTable.Engine.AdminEngineInterface;
 import com.DragonLegend.DragonLegendTable.Model.MenuItem;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -33,5 +34,10 @@ public class AdminController {
     @DeleteMapping(value = "/menuItem/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity deleteItem(@PathVariable String id){
         return ResponseEntity.ok(adminEngine.deleteItem(id));
+    }
+    @PatchMapping(value="/menuItem/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity disableItem(@PathVariable ("id") String id){
+
+        return ResponseEntity.ok("");
     }
 }

@@ -7,9 +7,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -19,7 +17,7 @@ public class AdminEngine implements AdminEngineInterface {
     @Override
     public List<MenuItem> getMenuByFilter(List<String> filterList) {
         if(filterList.size()<=0){return admEntity.findAll();}
-        List<MenuItem> menuList=Optional.ofNullable(admEntity.findAll())
+        List<MenuItem> menuList=Optional.of(admEntity.findAll())
                 .filter(list->!list.isEmpty())
                 .stream()
                 .flatMap(List::stream)
@@ -52,6 +50,15 @@ public class AdminEngine implements AdminEngineInterface {
             admEntity.save(menuItem);
             return menuItem;
         }
+    }
+
+    @Override
+    public MenuItem disableMenuItem(String id) {
+        Optional<MenuItem> request=admEntity.findById(id);
+      if(!request.isEmpty()){
+
+      }else return  new MenuItem();
+      return request.get();
     }
 
     @Override

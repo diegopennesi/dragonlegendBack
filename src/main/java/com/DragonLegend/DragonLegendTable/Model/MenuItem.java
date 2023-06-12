@@ -24,13 +24,15 @@ public class MenuItem {
     private double price;
     private String menuClass;
     private String Allergens ;
+    private boolean isActive;
     public MenuItem(){};
-    public MenuItem(String itemName, List<String> subChoice, String description, double price, String menuClass, String allergens) {
+    public MenuItem(String itemName, List<String> subChoice, String description, double price, String menuClass, String allergens, boolean isActive) {
         this.itemName = itemName;
         this.subChoice = subChoice;
         this.description = description;
         this.price = price;
         this.menuClass = menuClass;
+        this.isActive= isActive;
         Allergens = allergens;
     }
     public ObjectId getId() {
@@ -89,6 +91,8 @@ public class MenuItem {
         Allergens = allergens;
     }
 
+    public boolean isActive(){return isActive;}
+    public void setActive(boolean isActive){ this.isActive=isActive;}
     @Override
     public String toString() {
         return "MenuItem{" +

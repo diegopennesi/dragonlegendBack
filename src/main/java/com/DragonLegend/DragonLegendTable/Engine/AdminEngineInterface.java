@@ -8,5 +8,6 @@ import java.util.List;
 public interface AdminEngineInterface {
     public List<MenuItem>getMenuByFilter(List<String> filter);
     public MenuItem addNewMenuitem(MenuItem menuItem);
+    public MenuItem disableMenuItem(String id);
     public boolean deleteItem(String id);
 }
